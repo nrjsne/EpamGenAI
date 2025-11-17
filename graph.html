@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generative AI Vocabulary Usage Graph</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel-bg: #111729;
+      --text: #f5f7ff;
+      --muted: #9aa4ce;
+      --accent-vocab: #4f8cff;
+      --accent-section: #ffb347;
+      --link-color: #96a3ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1c2340, #050816);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow: hidden; /* main handles scroll */
+    }
+
+    header {
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
+      gap: 0;
+      flex: 1;
+      min-height: 0;
+      height: calc(100vh - 64px); /* approx header */
+      overflow: hidden;           /* inner panes scroll */
+    }
+
+    #graph-container {
+      position: relative;
+      min-height: 400px;
+      overflow: auto; /* horizontal + vertical scroll for graph */
+    }
+
+    #graph {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      position: relative;
+    }
+
+    #zoom-controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    #zoom-controls button {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(8, 12, 30, 0.92);
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    }
+
+    #zoom-controls button:hover {
+      background: rgba(19, 25, 60, 0.96);
+    }
+
+    #sidebar {
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(15,17,35,0.96), rgba(7,10,25,0.98));
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      overflow-y: auto; /* scroll sidebar */
+    }
+
+    #sidebar h2 {
+      margin: 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+    }
+
+    .legend-swatch.vocab {
+      background: var(--accent-vocab);
+      box-shadow: 0 0 10px rgba(79, 140, 255, 0.7);
+    }
+
+    .legend-swatch.section {
+      border-radius: 2px;
+      background: var(--accent-section);
+      box-shadow: 0 0 10px rgba(255, 179, 71, 0.7);
+    }
+
+    .legend-line {
+      width: 30px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--link-color);
+      box-shadow: 0 0 10px rgba(150, 163, 255, 0.7);
+    }
+
+    .stat-block {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: radial-gradient(circle at top left, #252c4b, #141829);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .stat-block h3 {
+      margin: 0 0 4px;
+      font-size: 13px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2px;
+      color: var(--muted);
+    }
+
+    .stat-row strong {
+      color: var(--text);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: rgba(14, 18, 40, 0.96);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      max-width: 260px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+      visibility: hidden;
+      opacity: 0;
+      transform: translate(-50%, -140%);
+      transition: opacity 0.12s ease-out, visibility 0.12s ease-out;
+    }
+
+    .tooltip.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip strong {
+      color: #ffffff;
+    }
+
+    svg {
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at top, rgba(33,38,72,0.6), rgba(7,10,25,0.9));
+    }
+
+    .link {
+      stroke: var(--link-color);
+      stroke-opacity: 0.6;
+    }
+
+    .node-label {
+      font-size: 10px;
+      fill: #e1e4ff;
+      pointer-events: none;
+      text-shadow: 0 0 4px #000000;
+    }
+
+    .node-circle {
+      stroke: rgba(10, 13, 32, 0.9);
+      stroke-width: 1;
+      cursor: pointer;
+    }
+
+    .node-rect {
+      stroke: rgba(10, 13, 32, 0.9);
+      stroke-width: 1;
+      cursor: pointer;
+      rx: 6;
+      ry: 6;
+    }
+
+    .node-circle.vocab {
+      fill: var(--accent-vocab);
+    }
+
+    .node-rect.section {
+      fill: var(--accent-section);
+    }
+
+    .node-circle.vocab:hover,
+    .node-rect.section:hover {
+      stroke-width: 2;
+      stroke: #ffffff;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: auto;
+      }
+      #sidebar {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        max-height: 40vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Generative AI Vocabulary & Report Usage</h1>
+    <p>Nodes = vocabulary & sections · Edge width = explicit + implicit mentions · Hover to inspect counts. Use scroll + zoom.</p>
+  </header>
+
+  <main>
+    <div id="graph-container">
+      <div id="graph"></div>
+      <div id="zoom-controls">
+        <button id="zoom-in">+</button>
+        <button id="zoom-out">−</button>
+      </div>
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <aside id="sidebar">
+      <h2>Overview</h2>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-swatch vocab"></span>
+          vocab term
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch section"></span>
+          report section
+        </div>
+        <div class="legend-item">
+          <span class="legend-line"></span>
+          link weight = total usage
+        </div>
+      </div>
+
+      <div class="stat-block" id="global-stats">
+        <h3>Global statistics</h3>
+        <div class="stat-row">
+          <span>Total terms:</span>
+          <strong id="stat-term-count">–</strong>
+        </div>
+        <div class="stat-row">
+          <span>Sum explicit:</span>
+          <strong id="stat-explicit-sum">–</strong>
+        </div>
+        <div class="stat-row">
+          <span>Sum implicit:</span>
+          <strong id="stat-implicit-sum">–</strong>
+        </div>
+      </div>
+
+      <div class="stat-block" id="selection-stats">
+        <h3 id="selection-title">Hover a node</h3>
+        <div id="selection-content" class="hint">
+          Hover a vocabulary word or section to see its explicit/implicit usage.
+        </div>
+      </div>
+
+      <div class="hint">
+        💡 Tip: Drag nodes to re-arrange; use wheel or + / − to zoom; scroll inside the graph area to explore all components.
+      </div>
+    </aside>
+  </main>
+
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script>
+    // === Precomputed statistics JSON ===
+    const graphData = {
+      "terms": [
+        { "id": "Hallucination",            "explicit": 1, "implicit": 1, "total": 2 },
+        { "id": "Factual Accuracy",         "explicit": 1, "implicit": 1, "total": 2 },
+        { "id": "Personalization",          "explicit": 1, "implicit": 2, "total": 3 },
+        { "id": "Localization",             "explicit": 1, "implicit": 1, "total": 2 },
+        { "id": "Intellectual Property Risk","explicit": 0, "implicit": 3, "total": 3 },
+        { "id": "Domain-Specific Knowledge","explicit": 1, "implicit": 0, "total": 1 },
+        { "id": "Controllability",          "explicit": 1, "implicit": 2, "total": 3 },
+        { "id": "Attribution",              "explicit": 1, "implicit": 0, "total": 1 },
+        { "id": "Context Maintenance",      "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Latency Constraints",      "explicit": 1, "implicit": 1, "total": 2 },
+        { "id": "Synthetic Data",           "explicit": 6, "implicit": 1, "total": 7 },
+        { "id": "Distributional Mismatch",  "explicit": 1, "implicit": 0, "total": 1 },
+        { "id": "Rare Event Modeling",      "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "In Silico Prediction",     "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Wet-Lab Validation",       "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Prosody",                  "explicit": 1, "implicit": 0, "total": 1 },
+        { "id": "Voice Cloning",            "explicit": 4, "implicit": 0, "total": 4 },
+        { "id": "Dubbing Automation",       "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Boilerplate Code",         "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Function Generation",      "explicit": 1, "implicit": 1, "total": 2 },
+        { "id": "Creative Prototyping",     "explicit": 0, "implicit": 2, "total": 2 },
+        { "id": "Composition Control",      "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Photorealism",             "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Conversational Agent",     "explicit": 0, "implicit": 1, "total": 1 },
+        { "id": "Workflow Automation",      "explicit": 0, "implicit": 1, "total": 1 }
+      ],
+      "sections": [
+        {
+          "id": "Intro",
+          "usage": {}
+        },
+        {
+          "id": "1. Content Generation (Marketing, Copywriting, Documents)",
+          "usage": {
+            "Hallucination": { "explicit": 1, "implicit": 0 },
+            "Factual Accuracy": { "explicit": 1, "implicit": 0 },
+            "Personalization": { "explicit": 1, "implicit": 0 },
+            "Localization": { "explicit": 1, "implicit": 0 },
+            "Intellectual Property Risk": { "explicit": 0, "implicit": 1 },
+            "Domain-Specific Knowledge": { "explicit": 1, "implicit": 0 },
+            "Controllability": { "explicit": 0, "implicit": 1 },
+            "Attribution": { "explicit": 1, "implicit": 0 }
+          }
+        },
+        {
+          "id": "2. Code Generation and Developer Productivity",
+          "usage": {
+            "Factual Accuracy": { "explicit": 0, "implicit": 1 },
+            "Boilerplate Code": { "explicit": 0, "implicit": 1 },
+            "Function Generation": { "explicit": 1, "implicit": 1 }
+          }
+        },
+        {
+          "id": "3. Image and Visual Generation",
+          "usage": {
+            "Personalization": { "explicit": 0, "implicit": 1 },
+            "Intellectual Property Risk": { "explicit": 0, "implicit": 2 },
+            "Controllability": { "explicit": 1, "implicit": 1 },
+            "Creative Prototyping": { "explicit": 0, "implicit": 2 },
+            "Composition Control": { "explicit": 0, "implicit": 1 },
+            "Photorealism": { "explicit": 0, "implicit": 1 }
+          }
+        },
+        {
+          "id": "4. Conversational AI and Virtual Assistants",
+          "usage": {
+            "Hallucination": { "explicit": 0, "implicit": 1 },
+            "Context Maintenance": { "explicit": 0, "implicit": 1 },
+            "Latency Constraints": { "explicit": 1, "implicit": 1 },
+            "Conversational Agent": { "explicit": 0, "implicit": 1 },
+            "Workflow Automation": { "explicit": 0, "implicit": 1 }
+          }
+        },
+        {
+          "id": "5. Synthetic Data Generation",
+          "usage": {
+            "Synthetic Data": { "explicit": 5, "implicit": 1 },
+            "Distributional Mismatch": { "explicit": 1, "implicit": 0 },
+            "Rare Event Modeling": { "explicit": 0, "implicit": 1 }
+          }
+        },
+        {
+          "id": "6. Scientific Discovery & Drug Design",
+          "usage": {
+            "In Silico Prediction": { "explicit": 0, "implicit": 1 },
+            "Wet-Lab Validation": { "explicit": 0, "implicit": 1 }
+          }
+        },
+        {
+          "id": "7. Audio and Speech Generation",
+          "usage": {
+            "Personalization": { "explicit": 0, "implicit": 1 },
+            "Localization": { "explicit": 0, "implicit": 1 },
+            "Prosody": { "explicit": 1, "implicit": 0 },
+            "Voice Cloning": { "explicit": 4, "implicit": 0 },
+            "Dubbing Automation": { "explicit": 0, "implicit": 1 }
+          }
+        }
+      ]
+    };
+
+    // === Build nodes & links for the graph ===
+    const vocabNodes = graphData.terms.map(t => ({
+      id: t.id,
+      type: "vocab",
+      explicit: t.explicit,
+      implicit: t.implicit,
+      total: t.total,
+      label: t.id
+    }));
+
+    const sectionNodes = graphData.sections.map(s => ({
+      id: s.id,
+      type: "section",
+      explicit: 0,
+      implicit: 0,
+      total: 0,
+      label: s.id.replace(/^[0-9]+\.\s*/, "") // remove leading "X. "
+    }));
+
+    const links = [];
+    const sectionUsageMap = {};
+
+    graphData.sections.forEach(sec => {
+      sectionUsageMap[sec.id] = sec.usage || {};
+      Object.entries(sec.usage || {}).forEach(([termId, counts]) => {
+        const weight = (counts.explicit || 0) + (counts.implicit || 0);
+        if (weight > 0) {
+          links.push({
+            source: termId,
+            target: sec.id,
+            explicit: counts.explicit || 0,
+            implicit: counts.implicit || 0,
+            weight
+          });
+        }
+      });
+    });
+
+    const allNodes = [...vocabNodes, ...sectionNodes];
+
+    // Update section totals from links
+    const sectionIndex = new Map(sectionNodes.map(n => [n.id, n]));
+    links.forEach(l => {
+      const sec = sectionIndex.get(l.target);
+      if (sec) {
+        sec.total += l.weight;
+        sec.explicit += l.explicit;
+        sec.implicit += l.implicit;
+      }
+    });
+
+    // === Compute connected components to keep separate subgraphs grouped ===
+    const nodeById = new Map(allNodes.map(n => [n.id, n]));
+    const adjacency = new Map(allNodes.map(n => [n.id, []]));
+
+    links.forEach(l => {
+      adjacency.get(l.source).push(l.target);
+      adjacency.get(l.target).push(l.source);
+    });
+
+    let componentId = 0;
+    const visited = new Set();
+
+    allNodes.forEach(node => {
+      if (visited.has(node.id)) return;
+      const queue = [node.id];
+      while (queue.length) {
+        const cur = queue.shift();
+        if (visited.has(cur)) continue;
+        visited.add(cur);
+        const curNode = nodeById.get(cur);
+        curNode.component = componentId;
+        (adjacency.get(cur) || []).forEach(nb => {
+          if (!visited.has(nb)) queue.push(nb);
+        });
+      }
+      componentId++;
+    });
+
+    const componentCount = componentId || 1;
+
+    // === Global stats ===
+    const explicitSum = graphData.terms.reduce((acc, t) => acc + t.explicit, 0);
+    const implicitSum = graphData.terms.reduce((acc, t) => acc + t.implicit, 0);
+
+    document.getElementById("stat-term-count").textContent = graphData.terms.length;
+    document.getElementById("stat-explicit-sum").textContent = explicitSum;
+    document.getElementById("stat-implicit-sum").textContent = implicitSum;
+
+    // === D3 visualization ===
+    const container = document.getElementById("graph");
+    const tooltip = document.getElementById("tooltip");
+
+    // Make a big canvas so we can scroll around
+    const canvasWidth = 1600;
+    const canvasHeight = 900;
+
+    const svg = d3.select("#graph")
+      .append("svg")
+      .attr("width", canvasWidth)
+      .attr("height", canvasHeight)
+      .attr("viewBox", [0, 0, canvasWidth, canvasHeight])
+      .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // Zoom layer
+    const gZoom = svg.append("g").attr("class", "zoom-layer");
+
+    const maxTotal = d3.max(vocabNodes, d => d.total) || 1;
+    const radiusScale = d3.scaleSqrt()
+      .domain([0, maxTotal])
+      .range([6, 24]);
+
+    const linkWidthScale = d3.scaleLinear()
+      .domain([1, d3.max(links, d => d.weight) || 1])
+      .range([0.5, 4]);
+
+    // cluster components along X axis so disconnected subgraphs appear side-by-side
+    const simulation = d3.forceSimulation(allNodes)
+      .force("link", d3.forceLink(links)
+        .id(d => d.id)
+        .distance(d => 80 + d.weight * 12)
+        .strength(0.4))
+      .force("charge", d3.forceManyBody().strength(-230))
+      .force("x", d3.forceX(d => {
+        const c = d.component || 0;
+        const spacing = canvasWidth / (componentCount + 1);
+        return spacing * (c + 1);
+      }).strength(0.06))
+      .force("y", d3.forceY(canvasHeight / 2).strength(0.06))
+      .force("collision", d3.forceCollide().radius(d => {
+        if (d.type === "vocab") return radiusScale(d.total || 1) + 6;
+        return 26;
+      }));
+
+    const link = gZoom.append("g")
+      .attr("stroke-linecap", "round")
+      .selectAll("line")
+      .data(links)
+      .enter()
+      .append("line")
+      .attr("class", "link")
+      .attr("stroke-width", d => linkWidthScale(d.weight));
+
+    const nodeGroup = gZoom.append("g")
+      .selectAll("g")
+      .data(allNodes)
+      .enter()
+      .append("g")
+      .call(d3.drag()
+        .on("start", dragStarted)
+        .on("drag", dragged)
+        .on("end", dragEnded)
+      );
+
+    nodeGroup.each(function (d) {
+      const g = d3.select(this);
+      if (d.type === "vocab") {
+        g.append("circle")
+          .attr("class", "node-circle vocab")
+          .attr("r", radiusScale(d.total || 1));
+      } else {
+        const baseWidth = 140;
+        const extra = Math.min(160, (d.label.length - 18) * 4);
+        const w = Math.max(baseWidth, baseWidth + (isNaN(extra) ? 0 : extra));
+        const h = 22;
+        d.rectWidth = w;
+        d.rectHeight = h;
+        g.append("rect")
+          .attr("class", "node-rect section")
+          .attr("x", -w / 2)
+          .attr("y", -h / 2)
+          .attr("width", w)
+          .attr("height", h);
+      }
+    });
+
+    nodeGroup.append("text")
+      .attr("class", "node-label")
+      .attr("text-anchor", "middle")
+      .attr("dy", 3)
+      .text(d => d.label);
+
+    nodeGroup
+      .on("mouseover", function (event, d) {
+        showTooltipNode(event, d);
+        updateSelectionPanel(d);
+      })
+      .on("mousemove", moveTooltip)
+      .on("mouseout", hideTooltip);
+
+    link
+      .on("mouseover", showTooltipLink)
+      .on("mousemove", moveTooltip)
+      .on("mouseout", hideTooltip);
+
+    simulation.on("tick", () => {
+      link
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+
+      nodeGroup.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
+    function dragStarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.2).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragEnded(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+    // === Zoom (wheel + buttons) ===
+    const zoom = d3.zoom()
+      .scaleExtent([0.3, 3])
+      .on("zoom", (event) => {
+        gZoom.attr("transform", event.transform);
+      });
+
+    svg.call(zoom).on("dblclick.zoom", null); // disable dblclick zoom if you want
+
+    const zoomInBtn = document.getElementById("zoom-in");
+    const zoomOutBtn = document.getElementById("zoom-out");
+
+    zoomInBtn.addEventListener("click", () => {
+      svg.transition().duration(200).call(zoom.scaleBy, 1.2);
+    });
+
+    zoomOutBtn.addEventListener("click", () => {
+      svg.transition().duration(200).call(zoom.scaleBy, 0.8);
+    });
+
+    // === Tooltip helpers ===
+    function showTooltipNode(event, d) {
+      const explicit = d.explicit || 0;
+      const implicit = d.implicit || 0;
+      const total = explicit + implicit;
+
+      tooltip.innerHTML = `
+        <div><strong>${d.label}</strong> <span style="opacity:0.8;">(${d.type})</span></div>
+        <div>Explicit: <strong>${explicit}</strong></div>
+        <div>Implicit: <strong>${implicit}</strong></div>
+        <div>Total: <strong>${total}</strong></div>
+      `;
+      tooltip.classList.add("visible");
+      moveTooltip(event);
+    }
+
+    function showTooltipLink(event, d) {
+      tooltip.innerHTML = `
+        <div><strong>${d.source.label || d.source.id}</strong> → <strong>${d.target.label || d.target.id}</strong></div>
+        <div>Explicit in section: <strong>${d.explicit}</strong></div>
+        <div>Implicit in section: <strong>${d.implicit}</strong></div>
+        <div>Weight (total): <strong>${d.weight}</strong></div>
+      `;
+      tooltip.classList.add("visible");
+      moveTooltip(event);
+    }
+
+    function moveTooltip(event) {
+      const { clientX, clientY } = event;
+      const rect = container.getBoundingClientRect();
+      tooltip.style.left = (clientX - rect.left) + "px";
+      tooltip.style.top = (clientY - rect.top - 10) + "px";
+    }
+
+    function hideTooltip() {
+      tooltip.classList.remove("visible");
+    }
+
+    // === Side panel info ===
+    function updateSelectionPanel(d) {
+      const titleEl = document.getElementById("selection-title");
+      const contentEl = document.getElementById("selection-content");
+
+      const explicit = d.explicit || 0;
+      const implicit = d.implicit || 0;
+      const total = explicit + implicit;
+
+      titleEl.textContent = d.type === "vocab" ? d.label : `Section: ${d.label}`;
+      let html = `
+        <div class="stat-row"><span>Explicit:</span><strong>${explicit}</strong></div>
+        <div class="stat-row"><span>Implicit:</span><strong>${implicit}</strong></div>
+        <div class="stat-row"><span>Total:</span><strong>${total}</strong></div>
+      `;
+
+      if (d.type === "section") {
+        const usage = sectionUsageMap[d.id] || {};
+        const entries = Object.entries(usage)
+          .sort((a, b) => (b[1].explicit + b[1].implicit) - (a[1].explicit + a[1].implicit));
+        if (entries.length) {
+          html += `<div class="hint" style="margin-top:6px;">Top vocabulary in this section:</div>`;
+          html += `<ul style="margin:4px 0 0 14px; padding:0; font-size:12px;">`;
+          entries.slice(0, 6).forEach(([termId, vals]) => {
+            const tTotal = (vals.explicit || 0) + (vals.implicit || 0);
+            html += `<li>${termId}: <strong>${tTotal}</strong> (<span style="opacity:0.8;">exp ${vals.explicit || 0}, imp ${vals.implicit || 0}</span>)</li>`;
+          });
+          html += `</ul>`;
+        }
+      }
+
+      contentEl.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
