@@ -1,8 +1,7 @@
 # Android Interview Preparation RAG System
 
 ## Video
-
-# TODO: link
+https://tinyurl.com/cnrfy7x5
 
 ## Main Idea
 
