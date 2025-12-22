@@ -1,0 +1,178 @@
+[
+    {
+        "id": 1,
+        "question": "What are coroutines and how do they differ from threads?",
+        "topic": "coroutines_basics",
+        "expected_keywords": ["coroutine", "thread", "lightweight", "suspend", "concurrent"],
+        "expected_concepts": ["coroutines are lightweight", "threads vs coroutines", "suspension"]
+    },
+    {
+        "id": 2,
+        "question": "Explain the suspend function in Kotlin coroutines",
+        "topic": "suspend_functions",
+        "expected_keywords": ["suspend", "function", "coroutine", "suspension point"],
+        "expected_concepts": ["suspend function", "suspension point", "non-blocking"]
+    },
+    {
+        "id": 3,
+        "question": "What is a CoroutineScope and why is it important?",
+        "topic": "coroutine_scope",
+        "expected_keywords": ["scope", "CoroutineScope", "lifecycle", "structured concurrency"],
+        "expected_concepts": ["coroutine scope", "structured concurrency", "lifecycle"]
+    },
+    {
+        "id": 4,
+        "question": "How does coroutine cancellation work?",
+        "topic": "cancellation",
+        "expected_keywords": ["cancel", "cancellation", "CancellationException", "cooperative"],
+        "expected_concepts": ["cancellation", "cooperative cancellation", "CancellationException"]
+    },
+    {
+        "id": 5,
+        "question": "What is the difference between launch and async in coroutines?",
+        "topic": "launch_vs_async",
+        "expected_keywords": ["launch", "async", "Deferred", "fire-and-forget", "result"],
+        "expected_concepts": ["launch vs async", "Deferred", "fire-and-forget"]
+    },
+    {
+        "id": 6,
+        "question": "Explain coroutine context and dispatchers",
+        "topic": "context_dispatchers",
+        "expected_keywords": ["context", "dispatcher", "Dispatchers", "Main", "IO", "Default"],
+        "expected_concepts": ["coroutine context", "dispatchers", "thread pool"]
+    },
+    {
+        "id": 7,
+        "question": "What is structured concurrency in Kotlin coroutines?",
+        "topic": "structured_concurrency",
+        "expected_keywords": ["structured", "concurrency", "parent", "child", "hierarchy"],
+        "expected_concepts": ["structured concurrency", "parent-child relationship", "hierarchy"]
+    },
+    {
+        "id": 8,
+        "question": "How do you handle exceptions in coroutines?",
+        "topic": "exception_handling",
+        "expected_keywords": ["exception", "try-catch", "CoroutineExceptionHandler", "supervisor"],
+        "expected_concepts": ["exception handling", "CoroutineExceptionHandler", "supervisor scope"]
+    },
+    {
+        "id": 9,
+        "question": "What is a Flow in Kotlin and how does it relate to coroutines?",
+        "topic": "flow",
+        "expected_keywords": ["Flow", "cold stream", "collect", "emit", "reactive"],
+        "expected_concepts": ["Flow", "cold stream", "reactive programming", "collect"]
+    },
+    {
+        "id": 10,
+        "question": "Explain the difference between Flow and LiveData",
+        "topic": "flow_vs_livedata",
+        "expected_keywords": ["Flow", "LiveData", "reactive", "lifecycle-aware"],
+        "expected_concepts": ["Flow vs LiveData", "reactive streams", "lifecycle"]
+    },
+    {
+        "id": 11,
+        "question": "What are coroutine builders and when to use each?",
+        "topic": "coroutine_builders",
+        "expected_keywords": ["builder", "launch", "async", "runBlocking", "coroutineScope"],
+        "expected_concepts": ["coroutine builders", "launch", "async", "runBlocking"]
+    },
+    {
+        "id": 12,
+        "question": "How does withContext work in coroutines?",
+        "topic": "withcontext",
+        "expected_keywords": ["withContext", "dispatcher", "switch", "context switching"],
+        "expected_concepts": ["withContext", "context switching", "dispatcher"]
+    },
+    {
+        "id": 13,
+        "question": "What is a Channel in Kotlin coroutines?",
+        "topic": "channels",
+        "expected_keywords": ["Channel", "send", "receive", "producer", "consumer"],
+        "expected_concepts": ["Channel", "producer-consumer", "communication"]
+    },
+    {
+        "id": 14,
+        "question": "Explain the difference between Channel types: Channel, BroadcastChannel, and ConflatedChannel",
+        "topic": "channel_types",
+        "expected_keywords": ["Channel", "BroadcastChannel", "ConflatedChannel", "buffer"],
+        "expected_concepts": ["channel types", "broadcast", "conflated", "buffer"]
+    },
+    {
+        "id": 15,
+        "question": "What is a SupervisorJob and when should you use it?",
+        "topic": "supervisor_job",
+        "expected_keywords": ["SupervisorJob", "supervisor", "exception", "failure isolation"],
+        "expected_concepts": ["SupervisorJob", "failure isolation", "exception handling"]
+    },
+    {
+        "id": 16,
+        "question": "How do you test coroutines in Android?",
+        "topic": "testing",
+        "expected_keywords": ["test", "runTest", "TestDispatcher", "delay", "advanceTimeBy"],
+        "expected_concepts": ["testing coroutines", "TestDispatcher", "runTest"]
+    },
+    {
+        "id": 17,
+        "question": "What is the difference between Dispatchers.Main, Dispatchers.IO, and Dispatchers.Default?",
+        "topic": "dispatchers",
+        "expected_keywords": ["Dispatchers", "Main", "IO", "Default", "thread pool"],
+        "expected_concepts": ["dispatchers", "Main thread", "IO operations", "CPU-bound"]
+    },
+    {
+        "id": 18,
+        "question": "Explain coroutine state machines and how they work",
+        "topic": "state_machines",
+        "expected_keywords": ["state machine", "continuation", "suspension", "resume"],
+        "expected_concepts": ["state machine", "continuation", "suspension mechanism"]
+    },
+    {
+        "id": 19,
+        "question": "What are Flow operators and give examples of common ones",
+        "topic": "flow_operators",
+        "expected_keywords": ["operator", "map", "filter", "flatMap", "transform"],
+        "expected_concepts": ["Flow operators", "transformation", "filtering", "mapping"]
+    },
+    {
+        "id": 20,
+        "question": "How do you convert a callback-based API to coroutines?",
+        "topic": "callback_to_coroutine",
+        "expected_keywords": ["callback", "suspendCoroutine", "suspendCancellableCoroutine", "conversion"],
+        "expected_concepts": ["callback conversion", "suspendCoroutine", "API adaptation"]
+    },
+    {
+        "id": 21,
+        "question": "What is a Mutex in coroutines and when is it needed?",
+        "topic": "mutex",
+        "expected_keywords": ["Mutex", "lock", "mutual exclusion", "synchronization"],
+        "expected_concepts": ["Mutex", "mutual exclusion", "synchronization", "shared state"]
+    },
+    {
+        "id": 22,
+        "question": "Explain the difference between cold and hot flows",
+        "topic": "cold_hot_flows",
+        "expected_keywords": ["cold", "hot", "Flow", "StateFlow", "SharedFlow"],
+        "expected_concepts": ["cold flow", "hot flow", "StateFlow", "SharedFlow"]
+    },
+    {
+        "id": 23,
+        "question": "What is a Job in coroutines and how does it relate to cancellation?",
+        "topic": "job",
+        "expected_keywords": ["Job", "cancel", "isActive", "isCompleted", "isCancelled"],
+        "expected_concepts": ["Job", "cancellation", "lifecycle", "state"]
+    },
+    {
+        "id": 24,
+        "question": "How do you handle timeouts in coroutines?",
+        "topic": "timeouts",
+        "expected_keywords": ["timeout", "withTimeout", "withTimeoutOrNull", "TimeoutCancellationException"],
+        "expected_concepts": ["timeout", "withTimeout", "timeout handling"]
+    },
+    {
+        "id": 25,
+        "question": "What is the difference between StateFlow and SharedFlow?",
+        "topic": "stateflow_sharedflow",
+        "expected_keywords": ["StateFlow", "SharedFlow", "state", "events", "replay"],
+        "expected_concepts": ["StateFlow", "SharedFlow", "state holder", "event stream"]
+    }
+]
+

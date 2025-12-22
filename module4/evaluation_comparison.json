@@ -1,0 +1,152 @@
+{
+  "comparisons": {
+    "query_expansion": {
+      "improvement_name": "Query Expansion vs Baseline",
+      "baseline": {
+        "precision_at_k": 0.896,
+        "faithfulness_score": 0.998,
+        "weak_precision": 0.4,
+        "weak_count": 4
+      },
+      "improved": {
+        "precision_at_k": 0.912,
+        "faithfulness_score": 0.992,
+        "weak_precision": 0.55,
+        "weak_count": 4
+      },
+      "improvements": {
+        "precision_improvement_percent": 1.79,
+        "faithfulness_improvement_percent": -0.6,
+        "precision_absolute_improvement": 0.016,
+        "faithfulness_absolute_improvement": -0.006,
+        "weak_precision_improvement_percent": 37.5,
+        "weak_precision_absolute_improvement": 0.15,
+        "weak_count_change": 0
+      }
+    },
+    "reranking": {
+      "improvement_name": "Re-ranking vs Baseline",
+      "baseline": {
+        "precision_at_k": 0.896,
+        "faithfulness_score": 0.998,
+        "weak_precision": 0.4,
+        "weak_count": 4
+      },
+      "improved": {
+        "precision_at_k": 0.96,
+        "faithfulness_score": 1.0,
+        "weak_precision": 0.6,
+        "weak_count": 1
+      },
+      "improvements": {
+        "precision_improvement_percent": 7.14,
+        "faithfulness_improvement_percent": 0.2,
+        "precision_absolute_improvement": 0.064,
+        "faithfulness_absolute_improvement": 0.002,
+        "weak_precision_improvement_percent": 50.0,
+        "weak_precision_absolute_improvement": 0.2,
+        "weak_count_change": -3
+      }
+    },
+    "hybrid": {
+      "improvement_name": "Hybrid Search vs Baseline",
+      "baseline": {
+        "precision_at_k": 0.896,
+        "faithfulness_score": 0.998,
+        "weak_precision": 0.4,
+        "weak_count": 4
+      },
+      "improved": {
+        "precision_at_k": 0.912,
+        "faithfulness_score": 1.0,
+        "weak_precision": 0.5,
+        "weak_count": 4
+      },
+      "improvements": {
+        "precision_improvement_percent": 1.79,
+        "faithfulness_improvement_percent": 0.2,
+        "precision_absolute_improvement": 0.016,
+        "faithfulness_absolute_improvement": 0.002,
+        "weak_precision_improvement_percent": 25.0,
+        "weak_precision_absolute_improvement": 0.1,
+        "weak_count_change": 0
+      }
+    },
+    "both": {
+      "improvement_name": "Both Improvements (QE+RR) vs Baseline",
+      "baseline": {
+        "precision_at_k": 0.896,
+        "faithfulness_score": 0.998,
+        "weak_precision": 0.4,
+        "weak_count": 4
+      },
+      "improved": {
+        "precision_at_k": 0.976,
+        "faithfulness_score": 1.0,
+        "weak_precision": 0.0,
+        "weak_count": 0
+      },
+      "improvements": {
+        "precision_improvement_percent": 8.93,
+        "faithfulness_improvement_percent": 0.2,
+        "precision_absolute_improvement": 0.08,
+        "faithfulness_absolute_improvement": 0.002,
+        "weak_precision_improvement_percent": -100.0,
+        "weak_precision_absolute_improvement": -0.4,
+        "weak_count_change": -4
+      }
+    }
+  },
+  "all_results": {
+    "baseline": {
+      "average_precision_at_k": 0.896,
+      "average_faithfulness_score": 0.998,
+      "perfect_precision_count": 20,
+      "high_precision_count": 21,
+      "perfect_precision_rate": 0.8,
+      "high_precision_rate": 0.84,
+      "weak_questions_count": 4,
+      "average_precision_weak_questions": 0.4
+    },
+    "query_expansion": {
+      "average_precision_at_k": 0.912,
+      "average_faithfulness_score": 0.992,
+      "perfect_precision_count": 19,
+      "high_precision_count": 21,
+      "perfect_precision_rate": 0.76,
+      "high_precision_rate": 0.84,
+      "weak_questions_count": 4,
+      "average_precision_weak_questions": 0.55
+    },
+    "reranking": {
+      "average_precision_at_k": 0.96,
+      "average_faithfulness_score": 1.0,
+      "perfect_precision_count": 21,
+      "high_precision_count": 24,
+      "perfect_precision_rate": 0.84,
+      "high_precision_rate": 0.96,
+      "weak_questions_count": 1,
+      "average_precision_weak_questions": 0.6
+    },
+    "hybrid": {
+      "average_precision_at_k": 0.912,
+      "average_faithfulness_score": 1.0,
+      "perfect_precision_count": 20,
+      "high_precision_count": 21,
+      "perfect_precision_rate": 0.8,
+      "high_precision_rate": 0.84,
+      "weak_questions_count": 4,
+      "average_precision_weak_questions": 0.5
+    },
+    "both": {
+      "average_precision_at_k": 0.976,
+      "average_faithfulness_score": 1.0,
+      "perfect_precision_count": 22,
+      "high_precision_count": 25,
+      "perfect_precision_rate": 0.88,
+      "high_precision_rate": 1.0,
+      "weak_questions_count": 0,
+      "average_precision_weak_questions": 0.0
+    }
+  }
+}

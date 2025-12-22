@@ -1,0 +1,1558 @@
+{
+  "evaluation_date": "2025-12-22T06:02:56.553120",
+  "configuration": {
+    "use_query_expansion": false,
+    "use_reranking": false,
+    "use_hybrid_search": false,
+    "top_k": 5,
+    "total_questions": 25,
+    "evaluated_questions": 25
+  },
+  "metrics": {
+    "average_precision_at_k": 0.896,
+    "average_faithfulness_score": 0.998,
+    "perfect_precision_count": 20,
+    "high_precision_count": 21,
+    "perfect_precision_rate": 0.8,
+    "high_precision_rate": 0.84,
+    "weak_questions_count": 4,
+    "average_precision_weak_questions": 0.4
+  },
+  "detailed_results": [
+    {
+      "question_id": 1,
+      "question": "What are coroutines and how do they differ from threads?",
+      "topic": "coroutines_basics",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 21 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 33 - Chunk 2: e a save in a game: we can use it to continue from the point where we stopped",
+            "keyword_matches": 3,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 274 - Chunk 2: he same thread withlaunch will wait, so one coroutine’s execution blocks another’s",
+            "keyword_matches": 3,
+            "concept_matches": 0
+          },
+          {
+            "title": "Page 30 - Chunk 2: Such a thread would need to be maintained, and that would be a huge cost",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 142 - Chunk 3: arent throughJob",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 21 - Chunk 2",
+          "distance": 0.3815
+        },
+        {
+          "title": "Page 33 - Chunk 2: e a save in a game: we can use it to continue from the point where we stopped",
+          "distance": 0.3845
+        },
+        {
+          "title": "Page 274 - Chunk 2: he same thread withlaunch will wait, so one coroutine’s execution blocks another’s",
+          "distance": 0.4029
+        },
+        {
+          "title": "Page 30 - Chunk 2: Such a thread would need to be maintained, and that would be a huge cost",
+          "distance": 0.41
+        },
+        {
+          "title": "Page 142 - Chunk 3: arent throughJob",
+          "distance": 0.4168
+        }
+      ]
+    },
+    {
+      "question_id": 2,
+      "question": "Explain the suspend function in Kotlin coroutines",
+      "topic": "suspend_functions",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 33 - Chunk 1: Part 1: Understanding Kotlin Coroutines 27 How does suspension work",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 48 - Chunk 1",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 45 - Chunk 1",
+            "keyword_matches": 3,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 21 - Chunk 1",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 62: Part 1: Understanding Kotlin Coroutines 56 callbacks, you should definitely not worry about the perf",
+            "keyword_matches": 3,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 0.95,
+        "raw_response": "0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 33 - Chunk 1: Part 1: Understanding Kotlin Coroutines 27 How does suspension work",
+          "distance": 0.2664
+        },
+        {
+          "title": "Page 48 - Chunk 1",
+          "distance": 0.2947
+        },
+        {
+          "title": "Page 45 - Chunk 1",
+          "distance": 0.2994
+        },
+        {
+          "title": "Page 21 - Chunk 1",
+          "distance": 0.3002
+        },
+        {
+          "title": "Page 62: Part 1: Understanding Kotlin Coroutines 56 callbacks, you should definitely not worry about the perf",
+          "distance": 0.3035
+        }
+      ]
+    },
+    {
+      "question_id": 3,
+      "question": "What is a CoroutineScope and why is it important?",
+      "topic": "coroutine_scope",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 141 - Chunk 2: ds.await()) } coroutineScope is a useful function, but it’s not the only one of its kind",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 152 - Chunk 2: their operations are done",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 443 - Chunk 2: e scopes instead of some shared global scope because we want our coroutines cancelled when they are ",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+          "distance": 0.3406
+        },
+        {
+          "title": "Page 141 - Chunk 2: ds.await()) } coroutineScope is a useful function, but it’s not the only one of its kind",
+          "distance": 0.3475
+        },
+        {
+          "title": "Page 152 - Chunk 2: their operations are done",
+          "distance": 0.3552
+        },
+        {
+          "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+          "distance": 0.3709
+        },
+        {
+          "title": "Page 443 - Chunk 2: e scopes instead of some shared global scope because we want our coroutines cancelled when they are ",
+          "distance": 0.3715
+        }
+      ]
+    },
+    {
+      "question_id": 4,
+      "question": "How does coroutine cancellation work?",
+      "topic": "cancellation",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 112 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+            "keyword_matches": 1,
+            "concept_matches": 0
+          },
+          {
+            "title": "Page 113 - Chunk 2: en a coroutine is already cancelled",
+            "keyword_matches": 1,
+            "concept_matches": 0
+          },
+          {
+            "title": "Page 107 - Chunk 1: Part 2: Kotlin Coroutines library 101 Cancellation A very important functionality of Kotlin Coroutin",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 107 - Chunk 2: Job interface has acancel method, which allows its cancellation",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 112 - Chunk 2",
+          "distance": 0.3498
+        },
+        {
+          "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+          "distance": 0.3966
+        },
+        {
+          "title": "Page 113 - Chunk 2: en a coroutine is already cancelled",
+          "distance": 0.4161
+        },
+        {
+          "title": "Page 107 - Chunk 1: Part 2: Kotlin Coroutines library 101 Cancellation A very important functionality of Kotlin Coroutin",
+          "distance": 0.4233
+        },
+        {
+          "title": "Page 107 - Chunk 2: Job interface has acancel method, which allows its cancellation",
+          "distance": 0.4345
+        }
+      ]
+    },
+    {
+      "question_id": 5,
+      "question": "What is the difference between launch and async in coroutines?",
+      "topic": "launch_vs_async",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 434 - Chunk 2: you need a scope, instead ofasync { ..",
+            "keyword_matches": 1,
+            "concept_matches": 0
+          },
+          {
+            "title": "Page 75 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 73 - Chunk 2: e async builder works is very similar tolaunch, but it has additional support for returning a value",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 88 - Chunk 2: om the parent",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 274 - Chunk 2: he same thread withlaunch will wait, so one coroutine’s execution blocks another’s",
+            "keyword_matches": 2,
+            "concept_matches": 0
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 434 - Chunk 2: you need a scope, instead ofasync { ..",
+          "distance": 0.3676
+        },
+        {
+          "title": "Page 75 - Chunk 2",
+          "distance": 0.3871
+        },
+        {
+          "title": "Page 73 - Chunk 2: e async builder works is very similar tolaunch, but it has additional support for returning a value",
+          "distance": 0.3975
+        },
+        {
+          "title": "Page 88 - Chunk 2: om the parent",
+          "distance": 0.4
+        },
+        {
+          "title": "Page 274 - Chunk 2: he same thread withlaunch will wait, so one coroutine’s execution blocks another’s",
+          "distance": 0.4256
+        }
+      ]
+    },
+    {
+      "question_id": 6,
+      "question": "Explain coroutine context and dispatchers",
+      "topic": "context_dispatchers",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 83 - Chunk 3: re the most impor- tant coroutine contexts",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 143 - Chunk 2",
+            "keyword_matches": 4,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 83 - Chunk 2: r context will be explained later)",
+            "keyword_matches": 5,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 395 - Chunk 2",
+            "keyword_matches": 5,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 83 - Chunk 3: re the most impor- tant coroutine contexts",
+          "distance": 0.3666
+        },
+        {
+          "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+          "distance": 0.4147
+        },
+        {
+          "title": "Page 143 - Chunk 2",
+          "distance": 0.4348
+        },
+        {
+          "title": "Page 83 - Chunk 2: r context will be explained later)",
+          "distance": 0.4456
+        },
+        {
+          "title": "Page 395 - Chunk 2",
+          "distance": 0.4659
+        }
+      ]
+    },
+    {
+      "question_id": 7,
+      "question": "What is structured concurrency in Kotlin coroutines?",
+      "topic": "structured_concurrency",
+      "retrieval_metrics": {
+        "precision": 0.8,
+        "relevant_count": 4,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 442 - Chunk 1: Part 4: Kotlin Coroutines in practice 436 Don’t break structured concurrency The mistakes we present",
+            "keyword_matches": 4,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 214 - Chunk 2: t structured concurrency",
+            "keyword_matches": 3,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 94 - Chunk 1",
+            "keyword_matches": 4,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 7 - Chunk 1: Introduction Why do you want to learn about Kotlin Coroutines",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 442 - Chunk 1: Part 4: Kotlin Coroutines in practice 436 Don’t break structured concurrency The mistakes we present",
+          "distance": 0.3812
+        },
+        {
+          "title": "Page 214 - Chunk 2: t structured concurrency",
+          "distance": 0.3978
+        },
+        {
+          "title": "Page 94 - Chunk 1",
+          "distance": 0.4018
+        },
+        {
+          "title": "Page 7 - Chunk 1: Introduction Why do you want to learn about Kotlin Coroutines",
+          "distance": 0.4045
+        },
+        {
+          "title": "Page 21 - Chunk 1",
+          "distance": 0.4367
+        }
+      ]
+    },
+    {
+      "question_id": 8,
+      "question": "How do you handle exceptions in coroutines?",
+      "topic": "exception_handling",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 177 - Chunk 2: ExceptionHandler to call this function if there is an unhandled exception",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 112 - Chunk 2",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 122 - Chunk 1: Part 2: Kotlin Coroutines library 116 Exception handling A very important part of how coroutines beh",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+            "keyword_matches": 1,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 439 - Chunk 2",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 177 - Chunk 2: ExceptionHandler to call this function if there is an unhandled exception",
+          "distance": 0.4202
+        },
+        {
+          "title": "Page 112 - Chunk 2",
+          "distance": 0.4225
+        },
+        {
+          "title": "Page 122 - Chunk 1: Part 2: Kotlin Coroutines library 116 Exception handling A very important part of how coroutines beh",
+          "distance": 0.4411
+        },
+        {
+          "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+          "distance": 0.4471
+        },
+        {
+          "title": "Page 439 - Chunk 2",
+          "distance": 0.449
+        }
+      ]
+    },
+    {
+      "question_id": 9,
+      "question": "What is a Flow in Kotlin and how does it relate to coroutines?",
+      "topic": "flow",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 427 - Chunk 2: on the JVM or to block the current thread until a flow is completed",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 5: Contents Introduction 1 Part 1: Understanding Kotlin Coroutines 7 Why Kotlin Coroutines",
+            "keyword_matches": 1,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 283 - Chunk 1: Part 3: Channel and Flow 277 Understanding Flow Kotlin Coroutines Flow is a much simpler concept tha",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 429 - Chunk 1",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 398 - Chunk 1",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 427 - Chunk 2: on the JVM or to block the current thread until a flow is completed",
+          "distance": 0.3082
+        },
+        {
+          "title": "Page 5: Contents Introduction 1 Part 1: Understanding Kotlin Coroutines 7 Why Kotlin Coroutines",
+          "distance": 0.3204
+        },
+        {
+          "title": "Page 283 - Chunk 1: Part 3: Channel and Flow 277 Understanding Flow Kotlin Coroutines Flow is a much simpler concept tha",
+          "distance": 0.3303
+        },
+        {
+          "title": "Page 429 - Chunk 1",
+          "distance": 0.334
+        },
+        {
+          "title": "Page 398 - Chunk 1",
+          "distance": 0.3366
+        }
+      ]
+    },
+    {
+      "question_id": 10,
+      "question": "Explain the difference between Flow and LiveData",
+      "topic": "flow_vs_livedata",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 270 - Chunk 2: tream, Flow and RxJava streams (Observable, Single, etc)",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 263 - Chunk 2: , perform their operations on-demand, and store nothing",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 282 - Chunk 3: re useful and worth learning about",
+            "keyword_matches": 1,
+            "concept_matches": 0
+          },
+          {
+            "title": "Page 270 - Chunk 1: Part 3: Channel and Flow 264 RxJava streams share most characteristics with Kotlin’sFlow",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 279 - Chunk 1: Part 3: Channel and Flow 273 Real-life use cases Practice shows that we more often need a flow inste",
+            "keyword_matches": 1,
+            "concept_matches": 0
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 270 - Chunk 2: tream, Flow and RxJava streams (Observable, Single, etc)",
+          "distance": 0.461
+        },
+        {
+          "title": "Page 263 - Chunk 2: , perform their operations on-demand, and store nothing",
+          "distance": 0.4653
+        },
+        {
+          "title": "Page 282 - Chunk 3: re useful and worth learning about",
+          "distance": 0.4682
+        },
+        {
+          "title": "Page 270 - Chunk 1: Part 3: Channel and Flow 264 RxJava streams share most characteristics with Kotlin’sFlow",
+          "distance": 0.4683
+        },
+        {
+          "title": "Page 279 - Chunk 1: Part 3: Channel and Flow 273 Real-life use cases Practice shows that we more often need a flow inste",
+          "distance": 0.4766
+        }
+      ]
+    },
+    {
+      "question_id": 11,
+      "question": "What are coroutine builders and when to use each?",
+      "topic": "coroutine_builders",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 142 - Chunk 2: nger but should cause fewer misunderstandings, and I find it more correct",
+            "keyword_matches": 5,
+            "concept_matches": 4
+          },
+          {
+            "title": "Page 131 - Chunk 2: (started at 1)",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 66: Part 2: Kotlin Coroutines library 60 Coroutine builders Suspending functions need to pass continuati",
+            "keyword_matches": 4,
+            "concept_matches": 4
+          },
+          {
+            "title": "Page 434 - Chunk 2: you need a scope, instead ofasync { ..",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 142 - Chunk 2: nger but should cause fewer misunderstandings, and I find it more correct",
+          "distance": 0.4154
+        },
+        {
+          "title": "Page 131 - Chunk 2: (started at 1)",
+          "distance": 0.4333
+        },
+        {
+          "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+          "distance": 0.4406
+        },
+        {
+          "title": "Page 66: Part 2: Kotlin Coroutines library 60 Coroutine builders Suspending functions need to pass continuati",
+          "distance": 0.4487
+        },
+        {
+          "title": "Page 434 - Chunk 2: you need a scope, instead ofasync { ..",
+          "distance": 0.4498
+        }
+      ]
+    },
+    {
+      "question_id": 12,
+      "question": "How does withContext work in coroutines?",
+      "topic": "withcontext",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 434 - Chunk 2: you need a scope, instead ofasync { ..",
+            "keyword_matches": 1,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 143 - Chunk 2",
+            "keyword_matches": 2,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 143 - Chunk 1",
+            "keyword_matches": 1,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 83 - Chunk 3: re the most impor- tant coroutine contexts",
+            "keyword_matches": 0,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 113 - Chunk 2: en a coroutine is already cancelled",
+            "keyword_matches": 1,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 434 - Chunk 2: you need a scope, instead ofasync { ..",
+          "distance": 0.3533
+        },
+        {
+          "title": "Page 143 - Chunk 2",
+          "distance": 0.3547
+        },
+        {
+          "title": "Page 143 - Chunk 1",
+          "distance": 0.3848
+        },
+        {
+          "title": "Page 83 - Chunk 3: re the most impor- tant coroutine contexts",
+          "distance": 0.4153
+        },
+        {
+          "title": "Page 113 - Chunk 2: en a coroutine is already cancelled",
+          "distance": 0.4265
+        }
+      ]
+    },
+    {
+      "question_id": 13,
+      "question": "What is a Channel in Kotlin coroutines?",
+      "topic": "channels",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 235: Part 3: Channel and Flow 229 Channel The Channel API was added as an inter-coroutine communication p",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 236 - Chunk 1",
+            "keyword_matches": 3,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 5: Contents Introduction 1 Part 1: Understanding Kotlin Coroutines 7 Why Kotlin Coroutines",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 247",
+            "keyword_matches": 5,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 237 - Chunk 2: n situation is when there is one coroutine on both sides of the channel",
+            "keyword_matches": 5,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 235: Part 3: Channel and Flow 229 Channel The Channel API was added as an inter-coroutine communication p",
+          "distance": 0.3529
+        },
+        {
+          "title": "Page 236 - Chunk 1",
+          "distance": 0.3771
+        },
+        {
+          "title": "Page 5: Contents Introduction 1 Part 1: Understanding Kotlin Coroutines 7 Why Kotlin Coroutines",
+          "distance": 0.3877
+        },
+        {
+          "title": "Page 247",
+          "distance": 0.4104
+        },
+        {
+          "title": "Page 237 - Chunk 2: n situation is when there is one coroutine on both sides of the channel",
+          "distance": 0.4178
+        }
+      ]
+    },
+    {
+      "question_id": 14,
+      "question": "Explain the difference between Channel types: Channel, BroadcastChannel, and ConflatedChannel",
+      "topic": "channel_types",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 240 - Chunk 2",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 270 - Chunk 2: tream, Flow and RxJava streams (Observable, Single, etc)",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 305 - Chunk 3: create a flow that has some of the characteristics of Channel. Each of these functions has",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 235: Part 3: Channel and Flow 229 Channel The Channel API was added as an inter-coroutine communication p",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 256: Part 3: Channel and Flow 250 } Summary Channel is a powerful inter-coroutine communication primitive",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 240 - Chunk 2",
+          "distance": 0.46
+        },
+        {
+          "title": "Page 270 - Chunk 2: tream, Flow and RxJava streams (Observable, Single, etc)",
+          "distance": 0.5456
+        },
+        {
+          "title": "Page 305 - Chunk 3: create a flow that has some of the characteristics of Channel. Each of these functions has",
+          "distance": 0.5574
+        },
+        {
+          "title": "Page 235: Part 3: Channel and Flow 229 Channel The Channel API was added as an inter-coroutine communication p",
+          "distance": 0.5879
+        },
+        {
+          "title": "Page 256: Part 3: Channel and Flow 250 } Summary Channel is a powerful inter-coroutine communication primitive",
+          "distance": 0.6106
+        }
+      ]
+    },
+    {
+      "question_id": 15,
+      "question": "What is a SupervisorJob and when should you use it?",
+      "topic": "supervisor_job",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 441: Part 4: Kotlin Coroutines in practice 435 Using SupervisorJob this way is pointless",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 181 - Chunk 2: ations section of the Coroutine scope functionschapter, we often make scopes for starting additional",
+            "keyword_matches": 1,
+            "concept_matches": 0
+          },
+          {
+            "title": "Page 442 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 125",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 146",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 441: Part 4: Kotlin Coroutines in practice 435 Using SupervisorJob this way is pointless",
+          "distance": 0.4823
+        },
+        {
+          "title": "Page 181 - Chunk 2: ations section of the Coroutine scope functionschapter, we often make scopes for starting additional",
+          "distance": 0.4876
+        },
+        {
+          "title": "Page 442 - Chunk 2",
+          "distance": 0.491
+        },
+        {
+          "title": "Page 125",
+          "distance": 0.5144
+        },
+        {
+          "title": "Page 146",
+          "distance": 0.515
+        }
+      ]
+    },
+    {
+      "question_id": 16,
+      "question": "How do you test coroutines in Android?",
+      "topic": "testing",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 232 - Chunk 1: Part 2: Kotlin Coroutines library 226 functions and properties",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 225 - Chunk 2: ss extended by all unit tests",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 233: Part 2: Kotlin Coroutines library 227 but in the end our tests can be very elegant and everything ca",
+            "keyword_matches": 1,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 207 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 208 - Chunk 1: Part 2: Kotlin Coroutines library 202 runTest runTest is the most commonly used function from kotlin",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.95"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 232 - Chunk 1: Part 2: Kotlin Coroutines library 226 functions and properties",
+          "distance": 0.3857
+        },
+        {
+          "title": "Page 225 - Chunk 2: ss extended by all unit tests",
+          "distance": 0.3971
+        },
+        {
+          "title": "Page 233: Part 2: Kotlin Coroutines library 227 but in the end our tests can be very elegant and everything ca",
+          "distance": 0.3983
+        },
+        {
+          "title": "Page 207 - Chunk 2",
+          "distance": 0.3995
+        },
+        {
+          "title": "Page 208 - Chunk 1: Part 2: Kotlin Coroutines library 202 runTest runTest is the most commonly used function from kotlin",
+          "distance": 0.434
+        }
+      ]
+    },
+    {
+      "question_id": 17,
+      "question": "What is the difference between Dispatchers.Main, Dispatchers.IO, and Dispatchers.Default?",
+      "topic": "dispatchers",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 172 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 157 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 154 - Chunk 2: atchers.Default threads and starve other coroutines using the same dispatcher",
+            "keyword_matches": 4,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 436 - Chunk 2: hese classes, remember that you need to inject a dispatcher so it can be overridden for unit testing",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 226 - Chunk 2",
+            "keyword_matches": 4,
+            "concept_matches": 3
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 172 - Chunk 2",
+          "distance": 0.3561
+        },
+        {
+          "title": "Page 157 - Chunk 2",
+          "distance": 0.3733
+        },
+        {
+          "title": "Page 154 - Chunk 2: atchers.Default threads and starve other coroutines using the same dispatcher",
+          "distance": 0.4694
+        },
+        {
+          "title": "Page 436 - Chunk 2: hese classes, remember that you need to inject a dispatcher so it can be overridden for unit testing",
+          "distance": 0.4706
+        },
+        {
+          "title": "Page 226 - Chunk 2",
+          "distance": 0.4714
+        }
+      ]
+    },
+    {
+      "question_id": 18,
+      "question": "Explain coroutine state machines and how they work",
+      "topic": "state_machines",
+      "retrieval_metrics": {
+        "precision": 0.4,
+        "relevant_count": 2,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 45 - Chunk 1",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 62: Part 1: Understanding Kotlin Coroutines 56 callbacks, you should definitely not worry about the perf",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 0.9"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 45 - Chunk 1",
+          "distance": 0.4624
+        },
+        {
+          "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+          "distance": 0.4681
+        },
+        {
+          "title": "Page 83 - Chunk 3: re the most impor- tant coroutine contexts",
+          "distance": 0.4913
+        },
+        {
+          "title": "Page 439 - Chunk 2",
+          "distance": 0.4939
+        },
+        {
+          "title": "Page 62: Part 1: Understanding Kotlin Coroutines 56 callbacks, you should definitely not worry about the perf",
+          "distance": 0.4976
+        }
+      ]
+    },
+    {
+      "question_id": 19,
+      "question": "What are Flow operators and give examples of common ones",
+      "topic": "flow_operators",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 343 - Chunk 2",
+            "keyword_matches": 0,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 282 - Chunk 3: re useful and worth learning about",
+            "keyword_matches": 0,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 305 - Chunk 3: create a flow that has some of the characteristics of Channel. Each of these functions has",
+            "keyword_matches": 0,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 289 - Chunk 1",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 314 - Chunk 2",
+            "keyword_matches": 0,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 343 - Chunk 2",
+          "distance": 0.4613
+        },
+        {
+          "title": "Page 282 - Chunk 3: re useful and worth learning about",
+          "distance": 0.4757
+        },
+        {
+          "title": "Page 305 - Chunk 3: create a flow that has some of the characteristics of Channel. Each of these functions has",
+          "distance": 0.4764
+        },
+        {
+          "title": "Page 289 - Chunk 1",
+          "distance": 0.5036
+        },
+        {
+          "title": "Page 314 - Chunk 2",
+          "distance": 0.504
+        }
+      ]
+    },
+    {
+      "question_id": 20,
+      "question": "How do you convert a callback-based API to coroutines?",
+      "topic": "callback_to_coroutine",
+      "retrieval_metrics": {
+        "precision": 0.4,
+        "relevant_count": 2,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 378 - Chunk 2: use callback functions, turn them into suspending functions using the suspendCancellableCoroutine⁵²",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 41 - Chunk 2: ser> { cont -> requestUser { user -> cont.resume(user) } } } You might wonder what happens if the AP",
+            "keyword_matches": 0,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 378 - Chunk 2: use callback functions, turn them into suspending functions using the suspendCancellableCoroutine⁵²",
+          "distance": 0.4672
+        },
+        {
+          "title": "Page 429 - Chunk 2: can be transformed into an object from a library like RxJava or Reactor, or it can be wrapped with a",
+          "distance": 0.4703
+        },
+        {
+          "title": "Page 41 - Chunk 2: ser> { cont -> requestUser { user -> cont.resume(user) } } } You might wonder what happens if the AP",
+          "distance": 0.4866
+        },
+        {
+          "title": "Page 112 - Chunk 2",
+          "distance": 0.4895
+        },
+        {
+          "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+          "distance": 0.4975
+        }
+      ]
+    },
+    {
+      "question_id": 21,
+      "question": "What is a Mutex in coroutines and when is it needed?",
+      "topic": "mutex",
+      "retrieval_metrics": {
+        "precision": 0.4,
+        "relevant_count": 2,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 192 - Chunk 1: Part 2: Kotlin Coroutines library 186 the finally block so that any exceptions thrown inside the blo",
+            "keyword_matches": 2,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 190 - Chunk 1",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 83 - Chunk 3: re the most impor- tant coroutine contexts",
+          "distance": 0.4222
+        },
+        {
+          "title": "Page 112 - Chunk 2",
+          "distance": 0.4268
+        },
+        {
+          "title": "Page 79 - Chunk 3: nalyze it we first need to learn a bit about context, cancelling, and exception handling",
+          "distance": 0.4407
+        },
+        {
+          "title": "Page 192 - Chunk 1: Part 2: Kotlin Coroutines library 186 the finally block so that any exceptions thrown inside the blo",
+          "distance": 0.4447
+        },
+        {
+          "title": "Page 190 - Chunk 1",
+          "distance": 0.4529
+        }
+      ]
+    },
+    {
+      "question_id": 22,
+      "question": "Explain the difference between cold and hot flows",
+      "topic": "cold_hot_flows",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 263 - Chunk 2: , perform their operations on-demand, and store nothing",
+            "keyword_matches": 5,
+            "concept_matches": 4
+          },
+          {
+            "title": "Page 263 - Chunk 1: Part 3: Channel and Flow 257 Hot and cold data sources Kotlin Coroutines initially had only Channel,",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 270 - Chunk 1: Part 3: Channel and Flow 264 RxJava streams share most characteristics with Kotlin’sFlow",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 267 - Chunk 1: Part 3: Channel and Flow 261 Hot channels, cold flow Time to get back to coroutines",
+            "keyword_matches": 3,
+            "concept_matches": 2
+          },
+          {
+            "title": "Page 282 - Chunk 3: re useful and worth learning about",
+            "keyword_matches": 1,
+            "concept_matches": 2
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 263 - Chunk 2: , perform their operations on-demand, and store nothing",
+          "distance": 0.4239
+        },
+        {
+          "title": "Page 263 - Chunk 1: Part 3: Channel and Flow 257 Hot and cold data sources Kotlin Coroutines initially had only Channel,",
+          "distance": 0.4565
+        },
+        {
+          "title": "Page 270 - Chunk 1: Part 3: Channel and Flow 264 RxJava streams share most characteristics with Kotlin’sFlow",
+          "distance": 0.4809
+        },
+        {
+          "title": "Page 267 - Chunk 1: Part 3: Channel and Flow 261 Hot channels, cold flow Time to get back to coroutines",
+          "distance": 0.5116
+        },
+        {
+          "title": "Page 282 - Chunk 3: re useful and worth learning about",
+          "distance": 0.5608
+        }
+      ]
+    },
+    {
+      "question_id": 23,
+      "question": "What is a Job in coroutines and how does it relate to cancellation?",
+      "topic": "job",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 107 - Chunk 2: Job interface has acancel method, which allows its cancellation",
+            "keyword_matches": 2,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 442 - Chunk 2",
+            "keyword_matches": 2,
+            "concept_matches": 1
+          },
+          {
+            "title": "Page 107 - Chunk 1: Part 2: Kotlin Coroutines library 101 Cancellation A very important functionality of Kotlin Coroutin",
+            "keyword_matches": 2,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 94 - Chunk 2: n(name) // main } } The other three important consequences of structured concurrency depend fully on",
+            "keyword_matches": 2,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 111",
+            "keyword_matches": 2,
+            "concept_matches": 3
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1. 1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 107 - Chunk 2: Job interface has acancel method, which allows its cancellation",
+          "distance": 0.3393
+        },
+        {
+          "title": "Page 442 - Chunk 2",
+          "distance": 0.3479
+        },
+        {
+          "title": "Page 107 - Chunk 1: Part 2: Kotlin Coroutines library 101 Cancellation A very important functionality of Kotlin Coroutin",
+          "distance": 0.3572
+        },
+        {
+          "title": "Page 94 - Chunk 2: n(name) // main } } The other three important consequences of structured concurrency depend fully on",
+          "distance": 0.3596
+        },
+        {
+          "title": "Page 111",
+          "distance": 0.3687
+        }
+      ]
+    },
+    {
+      "question_id": 24,
+      "question": "How do you handle timeouts in coroutines?",
+      "topic": "timeouts",
+      "retrieval_metrics": {
+        "precision": 0.4,
+        "relevant_count": 2,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 389 - Chunk 2",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 148",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1.0"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 112 - Chunk 2",
+          "distance": 0.4454
+        },
+        {
+          "title": "Page 389 - Chunk 2",
+          "distance": 0.454
+        },
+        {
+          "title": "Page 148",
+          "distance": 0.464
+        },
+        {
+          "title": "Page 437 - Chunk 2",
+          "distance": 0.4684
+        },
+        {
+          "title": "Page 173 - Chunk 2: matic that in such a class we can directly call otherCoroutineScope methods like cancel or ensureAct",
+          "distance": 0.4684
+        }
+      ]
+    },
+    {
+      "question_id": 25,
+      "question": "What is the difference between StateFlow and SharedFlow?",
+      "topic": "stateflow_sharedflow",
+      "retrieval_metrics": {
+        "precision": 1.0,
+        "relevant_count": 5,
+        "total_retrieved": 5,
+        "relevant_docs": [
+          {
+            "title": "Page 345 - Chunk 1: Part 3: Channel and Flow 339 SharedFlow and StateFlow Flow is typically cold, so its values are calc",
+            "keyword_matches": 4,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 354 - Chunk 1",
+            "keyword_matches": 4,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 356",
+            "keyword_matches": 4,
+            "concept_matches": 4
+          },
+          {
+            "title": "Page 358",
+            "keyword_matches": 3,
+            "concept_matches": 3
+          },
+          {
+            "title": "Page 401 - Chunk 1: Part 4: Kotlin Coroutines in practice 395 StateFlow should be used to represent a state",
+            "keyword_matches": 4,
+            "concept_matches": 4
+          }
+        ]
+      },
+      "faithfulness_metrics": {
+        "faithfulness_score": 1.0,
+        "raw_response": "1"
+      },
+      "retrieved_docs_count": 5,
+      "retrieved_docs": [
+        {
+          "title": "Page 345 - Chunk 1: Part 3: Channel and Flow 339 SharedFlow and StateFlow Flow is typically cold, so its values are calc",
+          "distance": 0.3575
+        },
+        {
+          "title": "Page 354 - Chunk 1",
+          "distance": 0.3958
+        },
+        {
+          "title": "Page 356",
+          "distance": 0.4488
+        },
+        {
+          "title": "Page 358",
+          "distance": 0.4607
+        },
+        {
+          "title": "Page 401 - Chunk 1: Part 4: Kotlin Coroutines in practice 395 StateFlow should be used to represent a state",
+          "distance": 0.4656
+        }
+      ]
+    }
+  ]
+}

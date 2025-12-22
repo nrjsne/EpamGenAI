@@ -1,0 +1,10 @@
+pypdf
+langchain==1.1.2
+weaviate-client==4.18.3
+sentence-transformers==5.1.2
+transformers
+torch
+numpy
+accelerate==1.12.0
+huggingface-hub==0.36.0
+python-dotenv==1.2.1
