@@ -36,14 +36,7 @@ class OrderRead(BaseModel):
 class PaginatedOrders(BaseModel):
     """
     Response schema for a paginated list of orders.
-
-    The `page` and `limit` parameters are 1-based and control the
-    pagination window.
     """
 
-    page: int
-    limit: int
-    total_items: int
-    total_pages: int
     items: list[OrderRead]
 

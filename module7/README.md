@@ -1,23 +1,16 @@
 ## Orders Management API (Module 7)
 
-This module implements a small Orders Management REST API with pagination and filtering,
-built using **FastAPI**, **SQLAlchemy**, and **SQLite**.
+This module implements a small Orders Management REST API
 
 ### Features
 
 - **POST `/orders`**: create a new order
-- **GET `/orders`**: list orders with pagination and filtering
 - **GET `/orders/{id}`**: fetch single order
 - **PUT `/orders/{id}`**: update an order
 - **DELETE `/orders/{id}`**: delete an order
-- **Pagination**: `page` and `limit` query parameters
-- **Filtering**:
-  - `status`: exact status filter
-  - `min_amount`, `max_amount`: amount range
-  - `start_date`, `end_date`: date/time range on `created_at`
 - **Database**: SQLite with SQLAlchemy models
 - **Seeding**: script to seed 50 sample orders
-- **Tests**: 12+ pytest tests that cover CRUD, pagination, filtering, and edge cases
+- **Tests**: 12+ pytest tests that cover CRUD and edge cases
 
 ### Installation
 
@@ -77,15 +70,9 @@ ones with varying statuses, amounts, and creation dates.
 
 - **GET `/orders`**
   - Query parameters:
-    - `page` (int, default 1, \>=1)
-    - `limit` (int, default 10, \>=1, \<=100)
     - `status` (optional str)
-    - `min_amount` (optional float, \>=0)
-    - `max_amount` (optional float, \>=0)
-    - `start_date` (optional ISO datetime)
-    - `end_date` (optional ISO datetime)
   - Response: `PaginatedOrders` structure:
-    - `page`, `limit`, `total_items`, `total_pages`, `items`
+    - `items`
 
 - **GET `/orders/{id}`**
   - Response: `OrderRead` or 404
@@ -96,13 +83,6 @@ ones with varying statuses, amounts, and creation dates.
 
 - **DELETE `/orders/{id}`**
   - Response: 204 No Content or 404
-
-### Pagination and Filtering Notes
-
-- Pagination uses `page` (1-based) and `limit` (page size) with sensible bounds.
-- Filtering is implemented via SQLAlchemy's query builder and parameter binding
-  to avoid SQL injection.
-- Date/time filters expect ISO-8601 strings, e.g. `2025-01-02T15:04:05`.
 
 ### Running Tests and Coverage
 
@@ -124,7 +104,5 @@ Notes:
 The test suite covers:
 
 - Creating, reading, updating, and deleting orders
-- Pagination behavior across multiple pages
-- Filtering by status, amount ranges, and date ranges
 - Edge cases such as non-existent IDs, invalid payloads, and out-of-range pages
 
