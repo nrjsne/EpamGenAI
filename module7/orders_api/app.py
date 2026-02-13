@@ -98,17 +98,48 @@ def delete_order(order_id: int, db: Session = Depends(get_db)):
 )
 def list_orders(
     db: Session = Depends(get_db),
+    page: int = Query(1, ge=1, description="Page number, min 1"),
+    limit: int = Query(10, ge=1, le=100, description="Page size, min 1, max 100"),
+    status: Optional[str] = Query(None, description="Filter by order status"),
+    amount_min: Optional[float] = Query(None, ge=0, description="Minimum order amount"),
+    amount_max: Optional[float] = Query(None, ge=0, description="Maximum order amount"),
+    date_from: Optional[datetime] = Query(None, description="Start date (inclusive)"),
+    date_to: Optional[datetime] = Query(None, description="End date (inclusive)"),
 ):
     """
-    List orders.
+    List orders with pagination.
     """
 
-    base_query = select(models.Order)
+    filters = []
+    if status:
+        filters.append(models.Order.status == status)
+    if amount_min is not None:
+        filters.append(models.Order.amount >= amount_min)
+    if amount_max is not None:
+        filters.append(models.Order.amount <= amount_max)
+    if date_from is not None:
+        filters.append(models.Order.created_at >= date_from)
+    if date_to is not None:
+        filters.append(models.Order.created_at <= date_to)
 
-    result = db.execute(base_query)
+    base_query = select(models.Order)
+    if filters:
+        base_query = base_query.where(and_(*filters))
+
+    # Get total count before pagination
+    total_query = select(func.count()).select_from(models.Order)
+    if filters:
+        total_query = total_query.where(and_(*filters))
+    total = db.execute(total_query).scalar()
+
+    offset = (page - 1) * limit
+    result = db.execute(base_query.offset(offset).limit(limit))
     orders = result.scalars().all()
 
     return schemas.PaginatedOrders(
         items=orders,
+        total=total,
+        page=page,
+        limit=limit,
     )
 

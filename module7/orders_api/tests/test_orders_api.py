@@ -139,3 +139,69 @@ def test_create_order_validation_error(client: TestClient):
     response = client.post("/orders", json=payload)
     assert response.status_code == 422
 
+
+# --- Pagination & Filtering Tests ---
+def test_list_orders_pagination_basic(client: TestClient):
+    # Add 25 sample orders
+    with TestingSessionLocal() as db:
+        create_sample_orders(db, 25)
+    resp = client.get("/orders?page=1&limit=10")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["page"] == 1
+    assert data["limit"] == 10
+    assert data["total"] == 25
+    assert len(data["items"]) == 10
+
+def test_list_orders_second_page(client: TestClient):
+    with TestingSessionLocal() as db:
+        create_sample_orders(db, 25)
+    resp = client.get("/orders?page=2&limit=10")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["page"] == 2
+    assert data["limit"] == 10
+    assert len(data["items"]) == 10
+
+def test_list_orders_status_filter(client: TestClient):
+    with TestingSessionLocal() as db:
+        create_sample_orders(db, 20)
+    resp = client.get("/orders?status=completed")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert all(order["status"] == "completed" for order in data["items"])
+
+def test_list_orders_amount_range_filter(client: TestClient):
+    with TestingSessionLocal() as db:
+        create_sample_orders(db, 20)
+    resp = client.get("/orders?amount_min=15&amount_max=25")
+    assert resp.status_code == 200
+    data = resp.json()
+    for order in data["items"]:
+        assert 15 <= order["amount"] <= 25
+
+def test_list_orders_date_range_filter(client: TestClient):
+    with TestingSessionLocal() as db:
+        create_sample_orders(db, 10)
+    date_from = (datetime.utcnow() - timedelta(days=5)).isoformat()
+    date_to = datetime.utcnow().isoformat()
+    resp = client.get(f"/orders?date_from={date_from}&date_to={date_to}")
+    assert resp.status_code == 200
+    data = resp.json()
+    for order in data["items"]:
+        assert order["created_at"] >= date_from
+        assert order["created_at"] <= date_to
+
+def test_pagination_edge_page_beyond_total(client: TestClient):
+    with TestingSessionLocal() as db:
+        create_sample_orders(db, 10)
+    resp = client.get("/orders?page=5&limit=10")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["page"] == 5
+    assert len(data["items"]) == 0
+
+def test_invalid_pagination_params(client: TestClient):
+    resp = client.get("/orders?page=0&limit=200")
+    assert resp.status_code == 422
+

@@ -71,8 +71,43 @@ ones with varying statuses, amounts, and creation dates.
 - **GET `/orders`**
   - Query parameters:
     - `status` (optional str)
+  - Query parameters:
+    - `page` (optional int, default 1)
+    - `limit` (optional int, default 10, max 100)
+    - `status` (optional str)
+    - `amount_min` (optional float)
+    - `amount_max` (optional float)
+    - `date_from` (optional ISO datetime)
+    - `date_to` (optional ISO datetime)
   - Response: `PaginatedOrders` structure:
-    - `items`
+    - `items`: list of orders
+    - `total`: total matching orders
+    - `page`: current page
+    - `limit`: page size
+
+  Example request:
+  ```http
+  GET /orders?page=2&limit=5&status=completed&amount_min=10&amount_max=100&date_from=2026-02-01T00:00:00&date_to=2026-02-13T23:59:59
+  ```
+
+  Example response:
+  ```json
+  {
+    "items": [
+      {
+        "id": 12,
+        "customer_name": "User 11",
+        "status": "completed",
+        "amount": 22.0,
+        "created_at": "2026-02-02T10:00:00"
+      }
+      // ...more orders...
+    ],
+    "total": 17,
+    "page": 2,
+    "limit": 5
+  }
+  ```
 
 - **GET `/orders/{id}`**
   - Response: `OrderRead` or 404

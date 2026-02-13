@@ -39,4 +39,7 @@ class PaginatedOrders(BaseModel):
     """
 
     items: list[OrderRead]
+    total: int
+    page: int
+    limit: int
 
